@@ -18,5 +18,10 @@ class M_leave extends CI_Model {
 			return $query->result_array();
 		}
 
-}
+		function get_leave_by_user_id($user_id){
+		    $this->db->where('user_id',$user_id);
+			$query = $this->db->get('tblleaves');
+			return $query->result_array();
+		}
 
+}

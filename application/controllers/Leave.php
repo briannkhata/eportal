@@ -27,11 +27,11 @@ class Leave extends CI_Controller {
 
 	function approve_leave(){
         $leave_id = $this->input->post('leave_id');
-        $data['approved'] = $this->input->post('approved');
+        $data['status'] = $this->input->post('status');
         $data['comment'] = $this->input->post('comment');
         $data['date_approved'] = date('Y-m-d-H-i-s');
 		$this->db->where('leave_id',$leave_id);
-		$this->db->update('leaves',$data);
+		$this->db->update('tblleaves',$data);
 		$this->session->set_flashdata('message','leave attended to successfully');
 		redirect('leave');
     }
@@ -40,7 +40,7 @@ class Leave extends CI_Controller {
 		$data['title']   = $this->input->post('title');
 		$data['start_date']     = $this->input->post('start_date');
 		$data['end_date']    = $this->input->post('end_date');
-		$data['leave_type_id']    = $this->input->post('leave_type_id');
+		//$data['leave_type_id']    = $this->input->post('leave_type_id');
 		//$data['days_applied'] = ceil(abs(strtotime($data['end_date']) - strtotime($data['start_date']))/86400);
 		$data['days_applied']     = $this->input->post('days_applied');
 		$data['user_id']  = $this->input->post('user_id');;
@@ -51,7 +51,7 @@ class Leave extends CI_Controller {
     function get_data_from_db($update_id){
 		$query = $this->M_leave->get_leave_by_id($update_id);
 		foreach ($query as $row) {
-		    $data['leave_type_id']    = $row['leave_type_id'];
+		    //$data['leave_type_id']    = $row['leave_type_id'];
 			$data['title']   = $row['title'];
 			$data['start_date']  = $row['start_date'];
 			$data['end_date']  = $row['end_date'];
@@ -67,9 +67,9 @@ class Leave extends CI_Controller {
 		$update_id = $this->input->post('update_id', TRUE);
 		if (isset($update_id)){
 			$this->db->where('leave_id',$update_id);
-			$this->db->update('leaves',$data);
+			$this->db->update('tblleaves',$data);
 		 }else{
-			$this->db->insert('leaves',$data);
+			$this->db->insert('tblleaves',$data);
 		}
 
 		$this->session->set_flashdata('message','leave saved successfully');
