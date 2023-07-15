@@ -4,15 +4,17 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Staff</label>
-                <select name="user_id" class="form-control">
+                <select class="form-control" disabled>
                     <option selected="" disabled="">Option</option>
                     <?php foreach($this->M_user->get_active_staffs() as $yo):?>
-                    <option <?php if($user_id == $yo['user_id']) echo 'selected';?> value="<?=$yo['user_id'];?>">
+                    <option <?php if($this->session->userdata('user_id') == $yo['user_id']) echo 'selected';?>
+                        value="<?=$this->session->userdata('user_id');?>">
                         <?=$yo['name'];?></option>
                     <?php endforeach;?>
                 </select>
             </div>
         </div>
+        <input type="hidden" name="user_id" value="<?=$this->session->userdata('user_id');?>">
 
         <div class="col-md-4">
             <div class="form-group">

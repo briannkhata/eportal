@@ -13,7 +13,7 @@ class Document extends CI_Controller {
 
 	function index(){
 		$this->check_session();
-		$data['page_title']  = 'document';
+		$data['page_title']  = 'documents';
 		$this->load->view($this->session->userdata('role').'/documents',$data);			
     }
 

@@ -20,7 +20,9 @@
 	                    <span class="arrow "></span>
 	                </a>
 	                <ul class="sub-menu">
-
+	                    <li>
+	                        <a href="<?=base_url();?>Leave/read"> - Apply Leave</a>
+	                    </li>
 	                    <li>
 	                        <a href="<?=base_url();?>leave">
 	                            - Applications</a>
@@ -29,18 +31,11 @@
 	            </li>
 
 	            <li>
-	                <a href="javascript:;">
+	                <a href="<?=base_url();?>Document">
 	                    <i class="fa fa-table	"></i>
 	                    <span class="title">Document Mangement</span>
-	                    <span class="arrow "></span>
 	                </a>
-	                <ul class="sub-menu">
 
-	                    <li>
-	                        <a href="<?=base_url();?>Document">
-	                            - Documents</a>
-	                    </li>
-	                </ul>
 	            </li>
 
 	        </ul>

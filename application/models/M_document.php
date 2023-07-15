@@ -17,6 +17,12 @@ class M_document extends CI_Model {
 			return $query->result_array();
 		}
 
+		function get_document_by_user_id($user_id){
+		    $this->db->where('user_id',$user_id);
+			$query = $this->db->get('tbldocuments');
+			return $query->result_array();
+		}
+
 		function get_document($document_id){
    		    $this->db->where('document_id',$document_id);
 			$query = $this->db->get('tbldocuments')->result_array();

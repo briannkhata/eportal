@@ -104,7 +104,6 @@ class Leave extends CI_Controller {
 		$this->db->delete('leaves');
 		$this->session->set_flashdata('message','leave deleted successfully');
 		redirect('leave');
-
 	}
 		
 }
