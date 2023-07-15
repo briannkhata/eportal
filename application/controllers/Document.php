@@ -13,14 +13,18 @@ class Document extends CI_Controller {
 
 	function index(){
 		$this->check_session();
-		$data['page_title']  = 'document types';
+		$data['page_title']  = 'document';
 		$this->load->view($this->session->userdata('role').'/documents',$data);			
     }
 
-    function get_data_from_post(){
-        $data['document']    = $this->input->post('document');
-		return $data;
-    }
+    // function get_data_from_post(){
+	// 	$data['user_id']  = $this->input->post('user_id');
+	// 	$data['document_type_id']    = $this->input->post('document_type_id');
+	// 	$data['document'] = $_FILES['document']['name'];
+	// 	move_uploaded_file($_FILES['slip']['tmp_name'],'uploads/docs/'.$data['document']);
+    //     $data['date_added'] = date('Y-m-d-H-i-s');
+	// 	return $data;
+    // }
 
     function get_data_from_db($update_id){
 		$query = $this->M_document->get_document_by_id($update_id);
@@ -31,46 +35,44 @@ class Document extends CI_Controller {
 	}
 
 	function save(){
-		$data = $this->get_data_from_post();
-		$update_id = $this->input->post('update_id', TRUE);
-		if (isset($update_id)){
-			$this->db->where('document_id',$update_id);
-			$this->db->update('tbldocuments',$data);
-		 }else{
-			$this->db->insert('tbldocuments',$data);
-		}
-
-		$this->session->set_flashdata('message','Data saved successfully');
-			if($update_id !=''):
-    			redirect('document');
-			else:
-				redirect('document/read');
-			endif;
+		$data['user_id']  = $this->input->post('user_id');
+		$data['document_type_id']    = $this->input->post('document_type_id');
+		$data['title']    = $this->input->post('title');
+		$data['document'] = $_FILES['document']['name'];
+        $data['date_added'] = date('Y-m-d-H-i-s');
+		move_uploaded_file($_FILES['document']['tmp_name'],'uploads/docs/'.$data['document']);
+		$this->db->insert('tbldocuments',$data);
+		$this->session->set_flashdata('message','Document added successfully');
+    	redirect('document');
 	}
 
 
 	function read(){
-		$update_id = $this->uri->segment(3);
-		if(!isset($update_id)){
-			$update_id = $this->input->post('update_id',$update_id);
-		}
-		if(is_numeric($update_id)){
-			$data = $this->get_data_from_db($update_id);
-			$data['update_id'] = $update_id;
-		}
-		else{
-			$data = $this->get_data_from_post();
-		}
+		//$update_id = $this->uri->segment(3);
+		// if(!isset($update_id)){
+		// 	$update_id = $this->input->post('update_id',$update_id);
+		// }
+		// if(is_numeric($update_id)){
+		// 	$data = $this->get_data_from_db($update_id);
+		// 	$data['update_id'] = $update_id;
+		// }
+		// else{
+		// 	$data = $this->get_data_from_post();
+		// }
 
-		$data['page_title']  = 'Create document type';
+		$data['page_title']  = 'Create document';
 		$this->load->view($this->session->userdata('role').'/add_document',$data);			
 	}
 
 	
 	function delete($param=''){
 		$data['deleted'] =  0;
+		$file_path = './uploads/docs/'.$this->M_document->get_document($param);
+		if (file_exists($file_path)) {
+			unlink($file_path);
+		}
 		$this->db->where('document_id',$param);
-        $this->db->delete('tbldocuments',$data);
+        $this->db->delete('tbldocuments');
     	$this->session->set_flashdata('message','Data deleted successfully');
 		redirect('document');
 	}

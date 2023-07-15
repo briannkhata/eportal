@@ -71,7 +71,7 @@
 
 	            <li>
 	                <a href="javascript:;">
-	                    <i class="fa fa-list"></i>
+	                    <i class="fa fa-table	"></i>
 	                    <span class="title">Document Mangement</span>
 	                    <span class="arrow "></span>
 	                </a>

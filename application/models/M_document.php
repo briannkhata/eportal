@@ -7,7 +7,6 @@ class M_document extends CI_Model {
 		}
 		
 		function get_documents(){
-		    $this->db->where('deleted',0);
 			$query = $this->db->get('tbldocuments');
 			return $query->result_array();
 		}

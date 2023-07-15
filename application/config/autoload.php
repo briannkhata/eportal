@@ -140,5 +140,6 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
-	'M_user','M_leave_type','M_slip','M_leave'
+	'M_user','M_leave_type','M_slip','M_leave',
+	'M_document','M_document_type'
  );
